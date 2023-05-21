@@ -1,0 +1,89 @@
+main{
+    margin: 0% 5%;
+}
+
+/* Centre le logo */
+.logo {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+    margin-bottom: 20px;
+  }
+  
+  .logo img {
+    max-width: 200px;
+  }
+  
+  /* Barre de recherche */
+  .search-bar {
+    background-color: #E7E7E7;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    border-radius: 5px;
+  }
+  
+  #search-input {
+    flex-grow: 1;
+    background-color: #E7E7E7;
+    border: none;
+  }
+  
+  /* Dropdown menus */
+  .dropdown {
+    position: relative;
+    display: inline-block;
+    margin-right: 10px;
+  }
+  
+  .dropdown .dropdown-toggle {
+    color: white;
+    border: none;
+    padding: 15px 20px;
+    font-weight: bold;
+  }
+  
+  .dropdown .dropdown-menu {
+    min-width: 200px;
+    border: none;
+  }
+  
+  .dropdown .dropdown-menu input {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  
+  .dropdown .dropdown-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .dropdown .dropdown-list li {
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  
+  .dropdown .dropdown-list li:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+  
+  .dropdown #ingredients-dropdown {
+    background-color: #3282F7;
+  }
+  
+  .dropdown #appliances-dropdown{
+    background-color: #68D9A4;
+  }
+  
+  .dropdown #utensils-dropdown{
+    background-color: #ED6454;
+  }
+  
+  
+  /* Cartes des recettes */
+  .recipes {
+    margin-top: 20px;
+  }

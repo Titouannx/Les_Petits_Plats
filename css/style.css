@@ -4,86 +4,176 @@ main{
 
 /* Centre le logo */
 .logo {
-    display: flex;
-    justify-content: center;
-    margin-top: 50px;
-    margin-bottom: 20px;
-  }
-  
-  .logo img {
-    max-width: 200px;
-  }
-  
-  /* Barre de recherche */
-  .search-bar {
-    background-color: #E7E7E7;
-    padding: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 20px;
-    border-radius: 5px;
-  }
-  
-  #search-input {
-    flex-grow: 1;
-    background-color: #E7E7E7;
-    border: none;
-  }
-  
-  /* Dropdown menus */
-  .dropdown {
-    position: relative;
-    display: inline-block;
-    margin-right: 10px;
-  }
-  
-  .dropdown .dropdown-toggle {
-    color: white;
-    border: none;
-    padding: 15px 20px;
-    font-weight: bold;
-  }
-  
-  .dropdown .dropdown-menu {
-    min-width: 200px;
-    border: none;
-  }
-  
-  .dropdown .dropdown-menu input {
-    width: 100%;
-    margin-bottom: 10px;
-  }
-  
-  .dropdown .dropdown-list {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .dropdown .dropdown-list li {
-    padding: 5px 10px;
-    cursor: pointer;
-  }
-  
-  .dropdown .dropdown-list li:hover {
-    background-color: rgba(0, 0, 0, 0.1);
-  }
-  
-  .dropdown #ingredients-dropdown {
-    background-color: #3282F7;
-  }
-  
-  .dropdown #appliances-dropdown{
-    background-color: #68D9A4;
-  }
-  
-  .dropdown #utensils-dropdown{
-    background-color: #ED6454;
-  }
-  
-  
-  /* Cartes des recettes */
-  .recipes {
-    margin-top: 20px;
-  }
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+  margin-bottom: 20px;
+}
+
+.logo img {
+  max-width: 200px;
+}
+
+/* Barre de recherche */
+.search-bar {
+  background-color: #E7E7E7;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  border-radius: 5px;
+}
+
+#search-input {
+  flex-grow: 1;
+  background-color: #E7E7E7;
+  border: none;
+}
+
+/* Dropdown menus */
+.dropdown {
+  position: relative;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.dropdown .dropdown-toggle {
+  color: white;
+  border: none;
+  padding: 15px 20px;
+  font-weight: bold;
+}
+
+.dropdown .dropdown-menu {
+  min-width: 200px;
+  border: none;
+}
+
+.dropdown .dropdown-menu input {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.dropdown .dropdown-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.dropdown .dropdown-list li {
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.dropdown .dropdown-list li:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.dropdown #ingredients-dropdown {
+  background-color: #3282F7;
+}
+
+.dropdown #appliances-dropdown{
+  background-color: #68D9A4;
+}
+
+.dropdown #utensils-dropdown{
+  background-color: #ED6454;
+}
+
+
+/* Cartes des recettes */
+.recipes {
+  margin-top: 20px;
+}
+
+#recipes-list{
+  display: flex;
+  flex-wrap: wrap;
+  height: 100px;
+  gap: 30px;
+}
+
+/* Styles pour les cartes de recettes */
+.recipe-card {
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  width: 400px;
+  background-color: #E7E7E7;
+}
+
+.recipe-card h2 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.recipe-card p {
+  margin-bottom: 8px;
+}
+
+.recipe-card ul {
+  margin-bottom: 12px;
+}
+
+.time-icon{
+  width: 20px;
+  margin-right: 5px;
+}
+
+.top-infos{
+  padding: 0px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.top-infos h2{
+  width: 220px;
+}
+
+.top-infos p{
+  width: 90px;
+}
+
+.bottom-infos{
+  padding: 0px 20px 20px 20px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  width: 400px;
+  height: 120px;
+  overflow: hidden;
+}
+
+.bottom-infos .ingredients-list{
+  margin: auto 0px;
+  list-style: none;
+  padding: 0;
+  width: 120px;
+}
+
+.bottom-infos .description{
+  margin: auto 0px;
+  width: 210px;
+  height: 90px;
+  display: -webkit-box; /* Utilisation des propriétés spécifiques à WebKit pour la flexibilité du contenu */
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 6; /* Nombre maximal de lignes */
+  overflow: hidden; /* Cacher le contenu dépassant */
+  text-overflow: ellipsis; /* Ajouter l'ellipse */
+}
+
+/* image */
+
+.recipe-card .recipe-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 5px 5px 0 0;
+  margin-bottom: 10px;
+  background-color: #C7BEBE;
+}

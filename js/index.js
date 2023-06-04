@@ -1,25 +1,36 @@
-// Sélectionnez l'élément conteneur pour les recettes dans le HTML (par exemple, <div id="recipe-container"></div>)
+// Sélectionnez l'élément conteneur pour les recettes dans le HTML
 const recipeContainer = document.getElementById("recipes-list");
-
 const searchInput = document.getElementById('search-input');
 searchInput.addEventListener('input', performSearch);
 
 function performSearch() {
   const searchTerm = searchInput.value.toLowerCase();
-  const filteredRecipes = recipes.filter(recipe => {
-    // Vérifier si le terme de recherche est présent dans le titre, les ingrédients ou la description
-    const titleMatch = recipe.name.toLowerCase().includes(searchTerm);
-    const ingredientsMatch = recipe.ingredients.some(ingredient =>
-      ingredient.ingredient.toLowerCase().includes(searchTerm)
-    );
-    const descriptionMatch = recipe.description.toLowerCase().includes(searchTerm);
-
-    // Retourner la recette si elle correspond à l'un des critères de recherche
-    return titleMatch || ingredientsMatch || descriptionMatch;
-  });
-
-  // Mettre à jour l'affichage des recettes filtrées
+  const filteredRecipes = searchRecipesLoop(searchTerm);
   displayRecipes(filteredRecipes);
+}
+
+function searchRecipesLoop(searchTerm) {
+  let result = [];
+
+  for (let index = 0; index < recipes.length; index++) {
+    let recipe = recipes[index];
+
+    if (recipeMatchesSearchTerm(recipe, searchTerm)) {
+      result.push(recipe);
+    }
+  }
+
+  return result;
+}
+
+function recipeMatchesSearchTerm(recipe, searchTerm) {
+  const titleMatch = recipe.name.toLowerCase().includes(searchTerm);
+  const ingredientsMatch = recipe.ingredients.some(ingredient =>
+    ingredient.ingredient.toLowerCase().includes(searchTerm)
+  );
+  const descriptionMatch = recipe.description.toLowerCase().includes(searchTerm);
+
+  return titleMatch || ingredientsMatch || descriptionMatch;
 }
 
 // Fonction pour générer une carte de recette

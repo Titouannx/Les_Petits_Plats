@@ -1,4 +1,4 @@
-// Sélectionnez l'élément conteneur pour les recettes dans le HTML (par exemple, <div id="recipe-container"></div>)
+// Sélectionnez l'élément conteneur pour les recettes dans le HTML
 const recipeContainer = document.getElementById("recipes-list");
 
 const searchInput = document.getElementById('search-input');

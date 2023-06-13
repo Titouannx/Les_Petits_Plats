@@ -2,6 +2,10 @@ main{
     margin: 0% 5%;
 }
 
+*:focus {
+  outline: none;
+}
+
 /* Centre le logo */
 .logo {
   display: flex;
@@ -12,6 +16,41 @@ main{
 
 .logo img {
   max-width: 200px;
+}
+
+#selected-tags{
+  margin-bottom: 10px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.selected-tag{
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.selected-tag-ingredients{
+  background-color: #3282F7;
+}
+
+.selected-tag-appliances{
+  background-color: #68D9A4;
+}
+
+.selected-tag-ustensils{
+  background-color: #ED6454;
+}
+
+.deleteTagImg{
+  width: 20px;
+  color: white;
+  margin: -4px 0px 0px 5px;
+  cursor: pointer;
 }
 
 /* Barre de recherche */
@@ -31,6 +70,30 @@ main{
   border: none;
 }
 
+button .search-input:focus {
+  background-color: transparent;
+}
+
+button .search-input::placeholder {
+  color: #FFF;
+  opacity: 50%;
+}
+
+#ingredients-search{
+  display: none;
+  color: white;
+}
+
+#appliances-search{
+  display: none;
+  color: white;
+}
+
+#ustensils-search{
+  display: none;
+  color: white;
+}
+
 /* Dropdown menus */
 .dropdown {
   position: relative;
@@ -39,7 +102,6 @@ main{
 }
 
 .dropdown .dropdown-toggle {
-  color: white;
   border: none;
   padding: 15px 20px;
   font-weight: bold;
@@ -48,11 +110,29 @@ main{
 .dropdown .dropdown-menu {
   min-width: 200px;
   border: none;
+  padding: 15px;
+  margin-top: -10px;
+  color: white;
 }
 
-.dropdown .dropdown-menu input {
-  width: 100%;
-  margin-bottom: 10px;
+.dropdown input {
+  width: 90%;
+  display: inline-block;
+  background-color: transparent;
+  border: none;
+  font-weight: 500;
+}
+
+.tags-dropdown{
+  display: block;
+  column-count: 3;
+  column-gap: 20px;
+}
+
+.tag{
+  margin-bottom: 5px;
+  width: max-content;
+  cursor: pointer;
 }
 
 .dropdown .dropdown-list {
@@ -63,7 +143,6 @@ main{
 
 .dropdown .dropdown-list li {
   padding: 5px 10px;
-  cursor: pointer;
 }
 
 .dropdown .dropdown-list li:hover {
@@ -78,7 +157,19 @@ main{
   background-color: #68D9A4;
 }
 
-.dropdown #utensils-dropdown{
+.dropdown #ustensils-dropdown{
+  background-color: #ED6454;
+}
+
+.dropdown #ingredients-button {
+  background-color: #3282F7;
+}
+
+.dropdown #appliances-button{
+  background-color: #68D9A4;
+}
+
+.dropdown #ustensils-button{
   background-color: #ED6454;
 }
 

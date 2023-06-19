@@ -94,14 +94,24 @@ function addIngredientsTags(ingredients) {
       deleteTagElement.addEventListener('click', () => {
         selectedTagElement.remove();
         performSearch();
+        updateTagsList(ingredientsInput, ingredientsTags);
       });
+      tagElement.remove();
       selectedTagElement.textContent = text;
+      selectedTagElement.id = text;
       selectedTagElement.classList.add('selected-tag', 'selected-tag-ingredients');
       selectedTagElement.appendChild(deleteTagElement);
       selectedTags.appendChild(selectedTagElement);
       performSearch();
+      updateTagsList(ingredientsInput, ingredientsTags);
     });
-    ingredientsTags.appendChild(tagElement);
+    //create array containing all tags in selectedTags and check if tag is already in it, if not add it to the dropdown
+    const selectedTagsArray = Array.from(selectedTags.children);
+    if (!selectedTagsArray.some(tag => tag.id === tagElement.textContent)) {
+      ingredientsTags.appendChild(tagElement);
+      //clear the input field
+      ingredientsInput.value = '';
+    }
   });
 }
 
@@ -120,14 +130,24 @@ function addAppliancesTags(appliances) {
       deleteTagElement.addEventListener('click', () => {
         selectedTagElement.remove();
         performSearch();
+        updateTagsList(appliancesInput, appliancesTags);
       });
+      tagElement.remove();
       selectedTagElement.textContent = text;
+      selectedTagElement.id = text;
       selectedTagElement.classList.add('selected-tag', 'selected-tag-appliances');
       selectedTagElement.appendChild(deleteTagElement);
       selectedTags.appendChild(selectedTagElement);
       performSearch();
+      updateTagsList(appliancesInput, appliancesTags);
     });
-    appliancesTags.appendChild(tagElement);
+    //create array containing all tags in selectedTags and check if tag is already in it, if not add it to the dropdown
+    const selectedTagsArray = Array.from(selectedTags.children);
+    if (!selectedTagsArray.some(tag => tag.id === tagElement.textContent)) {
+      appliancesTags.appendChild(tagElement);
+      //clear the input field
+      appliancesInput.value = '';
+    }
   });
 }
 
@@ -146,14 +166,24 @@ function addUstensilsTags(ustensils) {
       deleteTagElement.addEventListener('click', () => {
         selectedTagElement.remove();
         performSearch();
+        updateTagsList(ustensilsInput, ustensilsTags);
       });
+      tagElement.remove();
       selectedTagElement.textContent = text;
+      selectedTagElement.id = text;
       selectedTagElement.classList.add('selected-tag', 'selected-tag-ustensils');
       selectedTagElement.appendChild(deleteTagElement);
       selectedTags.appendChild(selectedTagElement);
       performSearch();
+      updateTagsList(ustensilsInput, ustensilsTags);
     });
-    ustensilsTags.appendChild(tagElement);
+    //create array containing all tags in selectedTags and check if tag is already in it, if not add it to the dropdown
+    const selectedTagsArray = Array.from(selectedTags.children);
+    if (!selectedTagsArray.some(tag => tag.id === tagElement.textContent)) {
+      ustensilsTags.appendChild(tagElement);
+      //clear the input field
+      ustensilsInput.value = '';
+    }
   });
 }
 
@@ -170,8 +200,36 @@ function updateTagsList(input, tagsList) {
       tag.style.display = 'none';
     }
   });
+  //Display a no tags found in the div containing the tags when the input of the tags dropdown menu doesn't find any tags corresponding to the input
+  const noTagsFound = document.createElement('div');
+  noTagsFound.textContent = 'Pas de tags correspondants';
+  noTagsFound.classList.add('noTagsFound');
+  if (tagsList.querySelectorAll('.tag').length === tagsList.querySelectorAll('.tag[style="display: none;"]').length) {
+    //remove all "No tags found" divs
+    const noTagsFoundArray = Array.from(tagsList.children);
+    noTagsFoundArray.forEach((element) => {
+      if (element.classList.contains('noTagsFound')) {
+        element.remove();
+      }
+    }
+    );
+    tagsList.appendChild(noTagsFound);
+    //change .tags-dropdown column-count to 1
+    tagsList.style.columnCount = '1';
+  }
+  else {
+    //remove all "No tags found" divs
+    const noTagsFoundArray = Array.from(tagsList.children);
+    noTagsFoundArray.forEach((element) => {
+      if (element.classList.contains('noTagsFound')) {
+        element.remove();
+      }
+    }
+    );
+    //change .tags-dropdown column-count to 3
+    tagsList.style.columnCount = '3';
+  }
 }
-
 
 // Gestion de la recherche d'ingrédients
 ingredientsInput.addEventListener('input', () => {
@@ -218,7 +276,34 @@ ustensilsButton.addEventListener("click", () => {
 const recipeContainer = document.getElementById("recipes-list");
 
 const searchInput = document.getElementById('search-input');
-searchInput.addEventListener('input', performSearch);
+searchInput.addEventListener('input', () => {
+  if(searchInput.value.length >= 3 || searchInput.value.length === 0) {
+  performSearch();
+  }
+});
+
+function updateTagsDropdowns(filteredRecipes) {
+  // Réinitialiser les menus déroulants des tags
+  ingredientsTags.innerHTML = '';
+  appliancesTags.innerHTML = '';
+  ustensilsTags.innerHTML = '';
+
+  // Mettre à jour les tags des ingrédients, appareils et ustensiles
+  const updatedIngredients = new Set();
+  const updatedAppliances = new Set();
+  const updatedUstensils = new Set();
+
+  filteredRecipes.forEach(recipe => {
+    recipe.ingredients.forEach(ingredient => updatedIngredients.add(ingredient.ingredient));
+    recipe.appliance && updatedAppliances.add(recipe.appliance);
+    recipe.ustensils.forEach(ustensil => updatedUstensils.add(ustensil));
+  });
+
+  addIngredientsTags(updatedIngredients);
+  addAppliancesTags(updatedAppliances);
+  addUstensilsTags(updatedUstensils);
+}
+
 
 function performSearch() {
   const searchTerm = searchInput.value.toLowerCase();
@@ -237,12 +322,27 @@ function performSearch() {
     const selectedUstensils = selectedTags.filter(tag => recipe.ustensils.some(ustensil => ustensil.toLowerCase().includes(tag)));
     const tagsMatch = selectedIngredients.length + selectedAppliances.length + selectedUstensils.length === selectedTags.length;
 
-    // Retourner la recette si elle correspond à tous les critères de recherche
-    return titleMatch && ingredientsMatch && descriptionMatch && tagsMatch;
+    // Retourner la recette si elle correspond aux critères de recherche
+    return (titleMatch || ingredientsMatch || descriptionMatch) && tagsMatch;
   });
 
   // Mettre à jour l'affichage des recettes filtrées
   displayRecipes(filteredRecipes);
+
+   // Vérifier si des recettes ont été trouvées
+   if (filteredRecipes.length === 0) {
+    // Afficher le message "Pas de recette correspondante"
+    const noResultsMessage = document.createElement('p');
+    noResultsMessage.classList.add('no-results-message');
+    noResultsMessage.textContent = 'Aucune recette ne correspond à votre critère… vous pouvez chercher « tarte aux pommes », « poisson », etc.';
+    // Ajouter le message à l'élément d'affichage des recettes
+    const recipesContainer = document.getElementById('recipes-list');
+    recipesContainer.innerHTML = '';
+    recipesContainer.appendChild(noResultsMessage);
+  }
+
+  // Mettre à jour les tags dans les menus déroulants
+  updateTagsDropdowns(filteredRecipes);
 }
 
 // Fonction pour générer une carte de recette

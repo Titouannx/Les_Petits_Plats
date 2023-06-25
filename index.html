@@ -22,7 +22,7 @@
       <div class="search-bar">
         <!-- Barre de recherche -->
         <input type="text" id="search-input" class="form-control search-input" placeholder="Rechercher une recette...">
-        <button id="search-button" class="btn"><img src="assets/images/search.png"></button>
+        <button id="search-button" class="btn"><img src="assets/images/search.png" alt="icône de recherche"></button>
       </div>
   
       <div class="tags">
@@ -32,20 +32,24 @@
       
         <!-- Dropdown menus -->
         <div class="dropdown">
-          <button class="btn btn-secondary dropdown-toggle" type="button" id="ingredients-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <span id="ingredients-label">Ingrédients</span>
+          <div class="input-button-wrapper">
+            <button class="btn btn-primary dropdown-toggle" type="button" id="ingredients-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span id="ingredients-label">Ingrédients</span>
+            </button>
             <input type="text" id="ingredients-search" class="form-control search-input" placeholder="Rechercher un ingrédient...">
-          </button>
+          </div>
           <div class="dropdown-menu" id="ingredients-dropdown" aria-labelledby="ingredients-dropdown">
             <!-- Options des ingrédients -->
             <div id="ingredients-tags" class="tags-dropdown"></div>
           </div>
         </div>
         <div class="dropdown">
-          <button class="btn btn-secondary dropdown-toggle" type="button" id="appliances-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <span id="appliances-label">Appareils</span>
+          <div class="input-button-wrapper">
+            <button class="btn btn-primary dropdown-toggle" type="button" id="appliances-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span id="appliances-label">Appareils</span>
+            </button>
             <input type="text" id="appliances-search" class="form-control search-input" placeholder="Rechercher un appareil...">
-          </button>
+          </div>
           <div class="dropdown-menu" id="appliances-dropdown" aria-labelledby="appliances-dropdown">
             <!-- Options des appareils -->
             <div id="appliances-tags" class="tags-dropdown"></div>
@@ -53,10 +57,12 @@
         </div>
       
         <div class="dropdown">
-          <button class="btn btn-secondary dropdown-toggle" type="button" id="ustensils-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <span id="ustensils-label">Ustensiles</span>
+          <div class="input-button-wrapper">
+            <button class="btn btn-primary dropdown-toggle" type="button" id="ustensils-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span id="ustensils-label">Ustensiles</span>
+            </button>
             <input type="text" id="ustensils-search" class="form-control search-input" placeholder="Rechercher un ustensile...">
-          </button>
+          </div>
           <div class="dropdown-menu" id="ustensils-dropdown" aria-labelledby="ustensils-dropdown">
             <!-- Options des ustensiles -->
             <div id="ustensils-tags" class="tags-dropdown"></div>

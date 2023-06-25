@@ -103,7 +103,7 @@ button .search-input::placeholder {
 
 .dropdown .dropdown-toggle {
   border: none;
-  padding: 15px 20px;
+  padding: 15px 25px;
   font-weight: bold;
 }
 
@@ -121,6 +121,41 @@ button .search-input::placeholder {
   background-color: transparent;
   border: none;
   font-weight: 500;
+  color: white;
+}
+
+.dropdown input::placeholder {
+  color: white;
+  opacity: 50%;
+}
+
+.dropdown input:focus {
+  background-color: transparent;
+}
+
+.input-button-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.input-button-wrapper input {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 90%;
+  height: 60%;
+}
+
+input:focus {
+  box-shadow: none !important;
+}
+
+.input-button-wrapper button{
+  text-align: right;
+}
+
+.input-button-wrapper button::after{
+  text-align: right;
 }
 
 .tags-dropdown{

@@ -34,6 +34,12 @@ function displayIngredientsDropdown() {
     ustensilsLabel.style.display = 'inline-block';
     ustensilsInput.style.display = 'none';
   }
+
+  function hideAllDropdowns() {
+    hideIngredientsDropdown()
+    hideAppliancesDropdown()
+    hideUstensilsDropdown()
+}
   
   
   ingredientsButton.addEventListener('click', () => {
@@ -46,6 +52,7 @@ function displayIngredientsDropdown() {
       hideUstensilsDropdown()
       clearAllDropdownsInputs()
     }
+    setButtonsWidth(ingredientsDropdown, ingredientsButton, '')
   });
   
   appliancesButton.addEventListener('click', () => {
@@ -58,6 +65,7 @@ function displayIngredientsDropdown() {
       hideUstensilsDropdown()
       clearAllDropdownsInputs()
     }
+    setButtonsWidth(appliancesDropdown, appliancesButton, '')
   });
   
   ustensilsButton.addEventListener('click', () => {
@@ -70,7 +78,28 @@ function displayIngredientsDropdown() {
       hideAppliancesDropdown()
       clearAllDropdownsInputs()
     }
+    setButtonsWidth(ustensilsDropdown, ustensilsButton, '')
   });
+
+  //function to set the ingredients, appliances and ustensils buttons on the width of the dropdowns when they are displayed
+    function setButtonsWidth(dropdown, button, action) {
+        if( action != 'delete') {
+            ingredientsButton.style.width = '150px';
+            appliancesButton.style.width = '150px';
+            ustensilsButton.style.width = '150px';
+        }
+        if(dropdown.style.display === "block") {
+            if(dropdown.offsetWidth < 250){
+                button.style.width = '250px';
+            }
+            else{
+                button.style.width = dropdown.offsetWidth + 'px';
+            }
+        }
+        else {
+            button.style.width = '150px';
+        }
+    }
   
   // Empêcher la propagation de l'événement de clic vers le bouton
   ingredientsInput.addEventListener('click', (event) => {
@@ -116,6 +145,7 @@ function displayIngredientsDropdown() {
           selectedTagElement.remove();
           performSearch();
           updateTagsList(ingredientsInput, ingredientsTags);
+          setButtonsWidth(ingredientsDropdown, ingredientsButton, 'delete')
         });
         tagElement.remove();
         selectedTagElement.textContent = text;
@@ -125,6 +155,7 @@ function displayIngredientsDropdown() {
         selectedTags.appendChild(selectedTagElement);
         performSearch();
         updateTagsList(ingredientsInput, ingredientsTags);
+        setButtonsWidth(ingredientsDropdown, ingredientsButton, '')
       });
       //create array containing all tags in selectedTags and check if tag is already in it, if not add it to the dropdown
       const selectedTagsArray = Array.from(selectedTags.children);
@@ -161,6 +192,7 @@ function displayIngredientsDropdown() {
           selectedTagElement.remove();
           performSearch();
           updateTagsList(appliancesInput, appliancesTags);
+          setButtonsWidth(appliancesDropdown, appliancesButton, 'delete')
         });
         tagElement.remove();
         selectedTagElement.textContent = text;
@@ -170,6 +202,7 @@ function displayIngredientsDropdown() {
         selectedTags.appendChild(selectedTagElement);
         performSearch();
         updateTagsList(appliancesInput, appliancesTags);
+        setButtonsWidth(appliancesDropdown, appliancesButton, '')
       });
       //create array containing all tags in selectedTags and check if tag is already in it, if not add it to the dropdown
       const selectedTagsArray = Array.from(selectedTags.children);
@@ -197,6 +230,7 @@ function displayIngredientsDropdown() {
           selectedTagElement.remove();
           performSearch();
           updateTagsList(ustensilsInput, ustensilsTags);
+          setButtonsWidth(ustensilsDropdown, ustensilsButton, 'delete')
         });
         tagElement.remove();
         selectedTagElement.textContent = text;
@@ -206,6 +240,7 @@ function displayIngredientsDropdown() {
         selectedTags.appendChild(selectedTagElement);
         performSearch();
         updateTagsList(ustensilsInput, ustensilsTags);
+        setButtonsWidth(ustensilsDropdown, ustensilsButton, '')
       });
       //create array containing all tags in selectedTags and check if tag is already in it, if not add it to the dropdown
       const selectedTagsArray = Array.from(selectedTags.children);
@@ -264,16 +299,19 @@ function displayIngredientsDropdown() {
   // Gestion de la recherche d'ingrédients
   ingredientsInput.addEventListener('input', () => {
     updateTagsList(ingredientsInput, ingredientsTags);
+    setButtonsWidth(ingredientsDropdown, ingredientsButton, '')
   });
   
   // Gestion de la recherche d'appareils
   appliancesInput.addEventListener('input', () => {
     updateTagsList(appliancesInput, appliancesTags);
+    setButtonsWidth(appliancesDropdown, appliancesButton, '')
   });
   
   // Gestion de la recherche d'ustensiles
   ustensilsInput.addEventListener('input', () => {
     updateTagsList(ustensilsInput, ustensilsTags);
+    setButtonsWidth(ustensilsDropdown, ustensilsButton, '')
   });
   
   function updateTagsDropdowns(filteredRecipes) {

@@ -1,8 +1,12 @@
 const searchInput = document.getElementById('search-input');
 searchInput.addEventListener('input', () => {
-  if(searchInput.value.length >= 3 || searchInput.value.length === 0) {
-  performSearch();
+    if(searchInput.value.length >= 3 || searchInput.value.length === 0) {
+    performSearch();
   }
+  hideAllDropdowns();
+  setButtonsWidth(ingredientsDropdown, ingredientsButton, '');
+  setButtonsWidth(appliancesDropdown, appliancesButton, '');
+  setButtonsWidth(ustensilsDropdown, ustensilsButton, '');
 });
 
 function performSearch() {

@@ -20,15 +20,78 @@ const ustensilsInput = document.getElementById('ustensils-search');
 
 const selectedTags = document.getElementById('selected-tags');
 
-//Gestion bouttons ingrédients, appareils et ustensiles (hide/show label/input)
+//Gestion bouttons ingrédients, appareils et ustensiles (hide/show label/input + dropdown menus)
+
+function displayIngredientsDropdown() {
+  ingredientsDropdown.style.display = "block";
+  ingredientsLabel.style.display = 'none';
+  ingredientsInput.style.display = 'inline-block';
+}
+
+function displayAppliancesDropdown() {
+  appliancesDropdown.style.display = "block";
+  appliancesLabel.style.display = 'none';
+  appliancesInput.style.display = 'inline-block';
+}
+
+function displayUstensilsDropdown() {
+  ustensilsDropdown.style.display = "block";
+  ustensilsLabel.style.display = 'none';
+  ustensilsInput.style.display = 'inline-block';
+}
+
+function hideIngredientsDropdown() {
+  ingredientsDropdown.style.display = "none";
+  ingredientsLabel.style.display = 'inline-block';
+  ingredientsInput.style.display = 'none';
+}
+
+function hideAppliancesDropdown() {
+  appliancesDropdown.style.display = "none";
+  appliancesLabel.style.display = 'inline-block';
+  appliancesInput.style.display = 'none';
+}
+
+function hideUstensilsDropdown() {
+  ustensilsDropdown.style.display = "none";
+  ustensilsLabel.style.display = 'inline-block';
+  ustensilsInput.style.display = 'none';
+}
+
+
 ingredientsButton.addEventListener('click', () => {
-  if (ingredientsLabel.style.display === 'none') {
-    ingredientsLabel.style.display = 'inline-block';
-    ingredientsInput.style.display = 'none';
+  if(ingredientsDropdown.style.display === "block") {
+    hideIngredientsDropdown()
   }
   else {
-    ingredientsLabel.style.display = 'none';
-    ingredientsInput.style.display = 'inline-block';
+    displayIngredientsDropdown()
+    hideAppliancesDropdown()
+    hideUstensilsDropdown()
+    clearAllDropdownsInputs()
+  }
+});
+
+appliancesButton.addEventListener('click', () => {
+  if(appliancesDropdown.style.display === "block") {
+    hideAppliancesDropdown()
+  }
+  else {
+    displayAppliancesDropdown()
+    hideIngredientsDropdown()
+    hideUstensilsDropdown()
+    clearAllDropdownsInputs()
+  }
+});
+
+ustensilsButton.addEventListener('click', () => {
+  if(ustensilsDropdown.style.display === "block") {
+    hideUstensilsDropdown()
+  }
+  else {
+    displayUstensilsDropdown()
+    hideIngredientsDropdown()   
+    hideAppliancesDropdown()
+    clearAllDropdownsInputs()
   }
 });
 
@@ -37,46 +100,27 @@ ingredientsInput.addEventListener('click', (event) => {
   event.stopPropagation();
 });
 
-appliancesButton.addEventListener('click', () => {
-  if (appliancesLabel.style.display === 'none') {
-    appliancesLabel.style.display = 'inline-block';
-    appliancesInput.style.display = 'none';
-  }
-  else {
-    appliancesLabel.style.display = 'none';
-    appliancesInput.style.display = 'inline-block';
-  }
-});
-
-// Empêcher la propagation de l'événement de clic vers le bouton
 appliancesInput.addEventListener('click', (event) => {
   event.stopPropagation();
 });
 
-ustensilsButton.addEventListener('click', () => {
-  if (ustensilsLabel.style.display === 'none') {
-    ustensilsLabel.style.display = 'inline-block';
-    ustensilsInput.style.display = 'none';
-  }
-  else {
-    ustensilsLabel.style.display = 'none';
-    ustensilsInput.style.display = 'inline-block';
-  }
-});
-
-// Empêcher la propagation de l'événement de clic vers le bouton
 ustensilsInput.addEventListener('click', (event) => {
   event.stopPropagation();
 });
+
+// Gestion du formatage des tags
+function formatLetterCase(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
 
 // Populate the tag dropdown menus dynamically
 const ingredients = new Set();
 const appliances = new Set();
 const ustensils = new Set();
 recipes.forEach(recipe => {
-  recipe.ingredients.forEach(ingredient => ingredients.add(ingredient.ingredient));
-  recipe.appliance && appliances.add(recipe.appliance);
-  recipe.ustensils.forEach(ustensil => ustensils.add(ustensil));
+  recipe.ingredients.forEach(ingredient => ingredients.add(formatLetterCase(ingredient.ingredient.toLowerCase())));
+  recipe.appliance && appliances.add(formatLetterCase(recipe.appliance.toLowerCase()));
+  recipe.ustensils.forEach(ustensil => ustensils.add(formatLetterCase(ustensil.toLowerCase())));
 });
 
 // Ajouter des tags pour les ingrédients
@@ -113,6 +157,15 @@ function addIngredientsTags(ingredients) {
       ingredientsInput.value = '';
     }
   });
+}
+
+function clearAllDropdownsInputs() {
+  ingredientsInput.value = '';
+  appliancesInput.value = '';
+  ustensilsInput.value = '';
+  updateTagsList(ingredientsInput, ingredientsTags);
+  updateTagsList(appliancesInput, appliancesTags);
+  updateTagsList(ustensilsInput, ustensilsTags);
 }
 
 // Ajouter des tags pour les appareils
@@ -246,32 +299,6 @@ ustensilsInput.addEventListener('input', () => {
   updateTagsList(ustensilsInput, ustensilsTags);
 });
 
-// Add event listeners to the dropdown buttons to show/hide the dropdown menus
-ingredientsButton.addEventListener("click", () => {
-  if(ingredientsDropdown.style.display === "block") {
-    ingredientsDropdown.style.display = "none";
-  }
-  else {
-    ingredientsDropdown.style.display = "block";
-  }
-});
-appliancesButton.addEventListener("click", () => {
-  if(appliancesDropdown.style.display === "block") {
-    appliancesDropdown.style.display = "none";
-  }
-  else {
-    appliancesDropdown.style.display = "block";
-  }
-});
-ustensilsButton.addEventListener("click", () => {
-  if(ustensilsDropdown.style.display === "block") {
-    ustensilsDropdown.style.display = "none";
-  }
-  else {
-    ustensilsDropdown.style.display = "block";
-  }
-});
-
 // Sélectionnez l'élément conteneur pour les recettes dans le HTML
 const recipeContainer = document.getElementById("recipes-list");
 
@@ -294,11 +321,10 @@ function updateTagsDropdowns(filteredRecipes) {
   const updatedUstensils = new Set();
 
   filteredRecipes.forEach(recipe => {
-    recipe.ingredients.forEach(ingredient => updatedIngredients.add(ingredient.ingredient));
-    recipe.appliance && updatedAppliances.add(recipe.appliance);
-    recipe.ustensils.forEach(ustensil => updatedUstensils.add(ustensil));
+    recipe.ingredients.forEach(ingredient => updatedIngredients.add(formatLetterCase(ingredient.ingredient.toLowerCase())));
+    recipe.appliance && updatedAppliances.add(formatLetterCase(recipe.appliance.toLowerCase()));
+    recipe.ustensils.forEach(ustensil => updatedUstensils.add(formatLetterCase(ustensil.toLowerCase())));
   });
-
   addIngredientsTags(updatedIngredients);
   addAppliancesTags(updatedAppliances);
   addUstensilsTags(updatedUstensils);

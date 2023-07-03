@@ -11,24 +11,9 @@ searchInput.addEventListener('input', () => {
 
 function performSearch() {
   const searchTerm = searchInput.value.toLowerCase();
-  const selectedTags = Array.from(document.querySelectorAll('.selected-tag')).map(tag => tag.textContent.toLowerCase());
-  const filteredRecipes = recipes.filter(recipe => {
-    // Vérifier si le terme de recherche est présent dans le titre, les ingrédients ou la description
-    const titleMatch = recipe.name.toLowerCase().includes(searchTerm);
-    const ingredientsMatch = recipe.ingredients.some(ingredient =>
-      ingredient.ingredient.toLowerCase().includes(searchTerm)
-    );
-    const descriptionMatch = recipe.description.toLowerCase().includes(searchTerm);
-
-    // Vérifier si la recette correspond aux tags sélectionnés
-    const selectedIngredients = selectedTags.filter(tag => recipe.ingredients.some(ingredient => ingredient.ingredient.toLowerCase().includes(tag)));
-    const selectedAppliances = selectedTags.filter(tag => recipe.appliance.toLowerCase().includes(tag));
-    const selectedUstensils = selectedTags.filter(tag => recipe.ustensils.some(ustensil => ustensil.toLowerCase().includes(tag)));
-    const tagsMatch = selectedIngredients.length + selectedAppliances.length + selectedUstensils.length === selectedTags.length;
-
-    // Retourner la recette si elle correspond aux critères de recherche
-    return (titleMatch || ingredientsMatch || descriptionMatch) && tagsMatch;
-  });
+  //const selectedTags = Array.from(document.querySelectorAll('.selected-tag')).map(tag => tag.textContent.toLowerCase());
+  
+  const filteredRecipes = searchRecipesLoop(searchTerm);
 
   // Mettre à jour l'affichage des recettes filtrées
   displayRecipes(filteredRecipes);
@@ -47,27 +32,6 @@ function performSearch() {
 
   // Mettre à jour les tags dans les menus déroulants
   updateTagsDropdowns(filteredRecipes);
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//A INTEGRER DE BOUCLES NATIVES
-function performSearch() {
-  const searchTerm = searchInput.value.toLowerCase();
-  const filteredRecipes = searchRecipesLoop(searchTerm);
-  displayRecipes(filteredRecipes);
 }
 
 function searchRecipesLoop(searchTerm) {

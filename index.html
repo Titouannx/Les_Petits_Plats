@@ -21,48 +21,54 @@
     <main>
       <div class="search-bar">
         <!-- Barre de recherche -->
-        <input type="text" id="search-input" class="form-control" placeholder="Rechercher une recette...">
-        <button id="search-button" class="btn"><img src="assets/images/search.png"></button>
+        <input type="text" id="search-input" class="form-control search-input" placeholder="Rechercher une recette...">
+        <button id="search-button" class="btn"><img src="assets/images/search.png" alt="icône de recherche"></button>
       </div>
   
       <div class="tags">
         <div id="selected-tags">
           <!-- Tags sélectionnés -->
-        </div>
+          </div>
       
         <!-- Dropdown menus -->
         <div class="dropdown">
-          <button class="btn btn-secondary dropdown-toggle" type="button" id="ingredients-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Ingrédients
-          </button>
-          <div class="dropdown-menu" aria-labelledby="ingredients-dropdown">
-            <!-- Options des ingrédients -->
+          <div class="input-button-wrapper">
+            <button class="btn btn-primary dropdown-toggle" type="button" id="ingredients-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span id="ingredients-label">Ingrédients</span>
+            </button>
             <input type="text" id="ingredients-search" class="form-control search-input" placeholder="Rechercher un ingrédient...">
-            <ul id="ingredients-list" class="dropdown-list"></ul>
+          </div>
+          <div class="dropdown-menu" id="ingredients-dropdown" aria-labelledby="ingredients-dropdown">
+            <!-- Options des ingrédients -->
+            <div id="ingredients-tags" class="tags-dropdown"></div>
           </div>
         </div>
         <div class="dropdown">
-          <button class="btn btn-secondary dropdown-toggle" type="button" id="appliances-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Appareils
-          </button>
-          <div class="dropdown-menu" aria-labelledby="appliances-dropdown">
-            <!-- Options des appareils -->
+          <div class="input-button-wrapper">
+            <button class="btn btn-primary dropdown-toggle" type="button" id="appliances-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span id="appliances-label">Appareils</span>
+            </button>
             <input type="text" id="appliances-search" class="form-control search-input" placeholder="Rechercher un appareil...">
-            <ul id="appliances-list" class="dropdown-list"></ul>
+          </div>
+          <div class="dropdown-menu" id="appliances-dropdown" aria-labelledby="appliances-dropdown">
+            <!-- Options des appareils -->
+            <div id="appliances-tags" class="tags-dropdown"></div>
           </div>
         </div>
-        
+      
         <div class="dropdown">
-          <button class="btn btn-secondary dropdown-toggle" type="button" id="utensils-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Ustensiles
-          </button>
-          <div class="dropdown-menu" aria-labelledby="utensils-dropdown">
-            <!-- Options des ustensiles -->
-            <input type="text" id="utensils-search" class="form-control search-input" placeholder="Rechercher un ustensile...">
-            <ul id="utensils-list" class="dropdown-list"></ul>
+          <div class="input-button-wrapper">
+            <button class="btn btn-primary dropdown-toggle" type="button" id="ustensils-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span id="ustensils-label">Ustensiles</span>
+            </button>
+            <input type="text" id="ustensils-search" class="form-control search-input" placeholder="Rechercher un ustensile...">
           </div>
-        </div>        
-      </div>      
+          <div class="dropdown-menu" id="ustensils-dropdown" aria-labelledby="ustensils-dropdown">
+            <!-- Options des ustensiles -->
+            <div id="ustensils-tags" class="tags-dropdown"></div>
+          </div>
+        </div>
+      </div>
   
       <div class="recipes">
         <!-- Affichage des recettes -->
@@ -72,6 +78,9 @@
 
     <script src="assets/bootstrap.js"></script>
     <script src="js/recipes.js"></script>
+    <script src="js/constants.js"></script>
+    <script src="js/gestionSearchInput.js"></script>
+    <script src="js/gestionDropDownInput.js"></script>
     <script src="js/index.js"></script>
   </body>
 </html>

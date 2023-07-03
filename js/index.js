@@ -1,38 +1,3 @@
-// Sélectionnez l'élément conteneur pour les recettes dans le HTML
-const recipeContainer = document.getElementById("recipes-list");
-const searchInput = document.getElementById('search-input');
-searchInput.addEventListener('input', performSearch);
-
-function performSearch() {
-  const searchTerm = searchInput.value.toLowerCase();
-  const filteredRecipes = searchRecipesLoop(searchTerm);
-  displayRecipes(filteredRecipes);
-}
-
-function searchRecipesLoop(searchTerm) {
-  let result = [];
-
-  for (let index = 0; index < recipes.length; index++) {
-    let recipe = recipes[index];
-
-    if (recipeMatchesSearchTerm(recipe, searchTerm)) {
-      result.push(recipe);
-    }
-  }
-
-  return result;
-}
-
-function recipeMatchesSearchTerm(recipe, searchTerm) {
-  const titleMatch = recipe.name.toLowerCase().includes(searchTerm);
-  const ingredientsMatch = recipe.ingredients.some(ingredient =>
-    ingredient.ingredient.toLowerCase().includes(searchTerm)
-  );
-  const descriptionMatch = recipe.description.toLowerCase().includes(searchTerm);
-
-  return titleMatch || ingredientsMatch || descriptionMatch;
-}
-
 // Fonction pour générer une carte de recette
 function createRecipeCard(recipe) {
   // Créer un élément <div> pour la carte de recette
@@ -114,7 +79,11 @@ function displayRecipes(recipes) {
   
 async function init() {
   // Appel de la fonction pour afficher les recettes dans la console
-displayRecipes(recipes);
+  displayRecipes(recipes);
+  // Ajouter des tags pour les ingrédients, les appareils et les ustensiles
+  addIngredientsTags(ingredients);
+  addAppliancesTags(appliances);
+  addUstensilsTags(ustensils);
 }
 
 init();

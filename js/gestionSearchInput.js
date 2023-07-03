@@ -48,3 +48,48 @@ function performSearch() {
   // Mettre à jour les tags dans les menus déroulants
   updateTagsDropdowns(filteredRecipes);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//A INTEGRER DE BOUCLES NATIVES
+function performSearch() {
+  const searchTerm = searchInput.value.toLowerCase();
+  const filteredRecipes = searchRecipesLoop(searchTerm);
+  displayRecipes(filteredRecipes);
+}
+
+function searchRecipesLoop(searchTerm) {
+  let result = [];
+
+  for (let index = 0; index < recipes.length; index++) {
+    let recipe = recipes[index];
+
+    if (recipeMatchesSearchTerm(recipe, searchTerm)) {
+      result.push(recipe);
+    }
+  }
+
+  return result;
+}
+
+function recipeMatchesSearchTerm(recipe, searchTerm) {
+  const titleMatch = recipe.name.toLowerCase().includes(searchTerm);
+  const ingredientsMatch = recipe.ingredients.some(ingredient =>
+    ingredient.ingredient.toLowerCase().includes(searchTerm)
+  );
+  const descriptionMatch = recipe.description.toLowerCase().includes(searchTerm);
+
+  return titleMatch || ingredientsMatch || descriptionMatch;
+}
